@@ -6,12 +6,33 @@ Function = input("Input Function: ")
 #IntvlEnd = float(input("Input Interval End: "))
 
 def derivative (Func):
+    if "+" in Func:
+        return additionrule (Func)
     if "^" in Func:
         return powerrule (Func)
     elif "*" in Func:
         return productrule (Func)
     elif Func == "x":
         return ("1")
+    elif 
+    
+    
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+        
+        
+def additionrule (Func):
+    parts = Func.split("+")
+    first = parts[0]
+    second = ""
+    del parts [0]
+    for i in parts:
+        second = (second+"+"+i)
+    deriv = (derivative(first)+"+"+derivative(second))
 
 def powerrule (Func):                           #split Func into a, x, and exp
     parts = Func.split("^")                     #splits the function ax^(exp) into (a*x, exp) 
@@ -26,7 +47,7 @@ def powerrule (Func):                           #split Func into a, x, and exp
     
     
     derivx = ""
-    if derivative(x) != "1":
+    if derivative(x) == "1":
         derivx = ("*("+derivative(x)+")")
     if (float(exp)-1) == 1:
         deriv = x
@@ -34,6 +55,7 @@ def powerrule (Func):                           #split Func into a, x, and exp
         deriv = (x+"^"+str(float(exp)-1)+derivx)
     if coef != 1:
         deriv = (str(float(coef)*float(exp))+"*"+deriv+derivx)
+    print (derivx)
     return deriv
     
 def productrule (Func):
