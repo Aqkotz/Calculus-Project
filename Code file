@@ -13,16 +13,15 @@ def derivative (Func):
     elif Func == "x":
         return ("1")
 
-def powerrule (Func):
-                                                #split Func into a, x, and exp
-    parts = Func.split("^")
-    parts2 = parts[0].split("*")
-    if len(parts2) <= 1:
+def powerrule (Func):                           #split Func into a, x, and exp
+    parts = Func.split("^")                     #splits the function ax^(exp) into (a*x, exp) 
+    parts2 = parts[0].split("*")                #splits the (a*x) into (a,x)
+    if len(parts2) <= 1:                        #If (a,x) only has (x), then set coef equal to 1
         coef = 1
-        x = ax[0]
-    else:
-        coef = ax[0]
-        x = ax[1]
+        x = parts2[0]                           
+    else:                                       #If (a,x) has (a,x) then set coef = a 
+        coef = parts2[0]
+        x = parts2[1]
     exp = parts[1]
     
     
