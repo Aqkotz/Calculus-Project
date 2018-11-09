@@ -10,6 +10,8 @@ def derivative (Func):
         return powerrule (Func)
     elif "*" in Func:
         return productrule (Func)
+    elif Func == "x":
+        return ("1")
 
 def powerrule (Func):
     parts = Func.split("^")
@@ -21,6 +23,9 @@ def powerrule (Func):
         coef = ax[0]
         x = ax[1]
     exp = parts[1]
+    derivx = ""
+    if derivative(x) != "1":
+        
     if (float(exp)-1) == 1:
         deriv = x
     else:
