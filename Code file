@@ -14,16 +14,18 @@ def derivative (Func):
         return ("1")
 
 def powerrule (Func):
-    #split Func into 
+                                                #split Func into a, x, and exp
     parts = Func.split("^")
-    ax = parts[0].split("*")
-    if len(ax) <= 1:
+    parts2 = parts[0].split("*")
+    if len(parts2) <= 1:
         coef = 1
         x = ax[0]
     else:
         coef = ax[0]
         x = ax[1]
     exp = parts[1]
+    
+    
     derivx = ""
     if derivative(x) != "1":
         derivx = ("*("+derivative(x)+")")
