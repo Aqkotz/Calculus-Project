@@ -1,1 +1,31 @@
+Function = input("Input Function: ")
+IntvlS = int(input("Input Interval Start: "))
+IntvlE = int(input("Input Interval End: "))
 
+indices = []
+points = []
+firstderiv = []
+secondderiv = []
+
+for l in range(IntvlS,IntvlE):
+    indices.append(float(l))
+
+for x in indices:    #for exponents use x**
+    points.append(eval(Function))
+
+for i in indices:
+    x = i
+    print (x)
+    FunCat = eval(Function)
+    x = i + 0.001
+    FunDog = eval(Function)
+    FunPets = FunCat-FunDog
+    FunTimes = FunPets/0.001
+    firstderiv.append(FunTimes)
+    
+#for k in indices:
+ #   secondderiv.append((deriv(k)-deriv(float(k)+0.001))/0.001)
+
+print(points)
+print(firstderiv)
+print(secondderiv)
