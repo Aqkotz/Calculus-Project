@@ -2,31 +2,41 @@ Function = input("Input Function: ")
 IntvlS = int(input("Input Interval Start: "))
 IntvlE = int(input("Input Interval End: "))
 
-indices = []
-points = []
-firstderiv = []
-secondderiv = []
-h = 0.0001
+indices = []        #x values - quoth andy koth 
+points = []         #Y values 
+firstderiv = []     #Definition of derivative 
+secondderiv = []    #Definition of derivative reapplied 
+h = 0.0001          
 
-for l in range(IntvlS,IntvlE):
-    indices.append(float(l))
+for l in range(IntvlS,IntvlE):          
+    indices.append(float(l))        #taking integers and turning them into floats                     
 
 for x in indices:    #for exponents use x**
-    points.append(eval(Function))
+    points.append(eval(Function))               #adds y values to the empty list of points
 
-for i in indices:
+for i in indices:                               #calculates the first derivative
     x = i
     FunCat = eval(Function)
     x = i + h
     FunDog = eval(Function)
     FunPets = FunCat-FunDog
     FunTimes = FunPets/h
-    firstderiv.append(FunTimes)
+    firstderiv.append(FunTimes)                 #adds 1st derivative values to empty list
     
-for k in indices:
+for k in indices:                               #Calculates the second derivative
     x = k+h
-    FunIguana = 
-
+    FunIguana = eval(Function)
+    x = k
+    FunMonkey = -2*eval(Function)
+    x = k-h 
+    FunSnail = eval(Function)
+    
+    FunDonkey = FunIguana + FunMonkey + FunSnail
+    FunAndrew = FunDonkey/(h**2)
+    
+    secondderiv.append(FunAndrew)
+    
+    
 print(points)
 print(firstderiv)
 print(secondderiv)
