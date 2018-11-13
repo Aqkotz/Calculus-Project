@@ -7,7 +7,7 @@ points = []         #Y values
 firstderiv = []     #Definition of derivative 
 secondderiv = []    #Definition of derivative reapplied 
 h = 0.000001     
-res = 100
+res = 5
 # Generate lists of points, derivatives, and second derivatives.
 for l in range(res*IntvlS,res*IntvlE):          
     indices.append(float(l)/res)        #taking integers and turning them into floats                     
@@ -32,13 +32,28 @@ for k in indices:                               #Calculates the second derivativ
     FunAndrew = FunDonkey/(h**2)
     secondderiv.append(FunAndrew)
 
-print (indices)
-print (firstderiv)
+#find criticals
+def near(val,targ):
+    if (val-targ) <= (1.5/res) and (val-targ) >= (-1.5/res):
+        return True
+    else:
+        return False
+criticals = []
+maxes = []
+mins = []
+pofs = []
+for idx,num in enumerate(firstderiv):
+    if near(num,0):
+        criticals.append(idx)
 
-#find extrema
-extremax = []
-for idx,val in enumerate(firstderiv):
-    if val < (1/res) and val > (-1/res):
-        extremax.append(indices[idx])
-        
-print (extremax)
+for g in criticals:
+    if near(secondderiv[g],0):
+        pofs.append(indices[g])
+    elif secondderiv[g] > 0:
+        mins.append(indices[g])
+    elif secondderiv[g] < 0:
+        maxes.append(indices[g])
+
+print("maxes: "+str(maxes))
+print("mins: "+str(mins))
+print("pofs: "+str(pofs))
