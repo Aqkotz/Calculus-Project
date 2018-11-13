@@ -6,6 +6,7 @@ indices = []
 points = []
 firstderiv = []
 secondderiv = []
+h = 0.0001
 
 for l in range(IntvlS,IntvlE):
     indices.append(float(l))
@@ -15,16 +16,16 @@ for x in indices:    #for exponents use x**
 
 for i in indices:
     x = i
-    print (x)
     FunCat = eval(Function)
-    x = i + 0.001
+    x = i + h
     FunDog = eval(Function)
     FunPets = FunCat-FunDog
-    FunTimes = FunPets/0.001
+    FunTimes = FunPets/h
     firstderiv.append(FunTimes)
     
-#for k in indices:
- #   secondderiv.append((deriv(k)-deriv(float(k)+0.001))/0.001)
+for k in indices:
+    x = k+h
+    FunIguana = 
 
 print(points)
 print(firstderiv)
