@@ -7,7 +7,7 @@ points = []         #Y values
 firstderiv = []     #Definition of derivative 
 secondderiv = []    #Definition of derivative reapplied 
 h = 0.000001     
-res = 5
+res = 50
 # Generate lists of points, derivatives, and second derivatives.
 for l in range(res*IntvlS,res*IntvlE):          
     indices.append(float(l)/res)        #taking integers and turning them into floats                     
@@ -42,6 +42,12 @@ criticals = []
 maxes = []
 mins = []
 pofs = []
+
+for i,num in enumerate(points):
+    if near(firstderiv[i],0):
+        if num > points[i-1] and num > 
+
+"""
 for idx,num in enumerate(firstderiv):
     if near(num,0):
         criticals.append(idx)
@@ -57,3 +63,4 @@ for g in criticals:
 print("maxes: "+str(maxes))
 print("mins: "+str(mins))
 print("pofs: "+str(pofs))
+"""
