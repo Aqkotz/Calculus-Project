@@ -7,7 +7,7 @@ points = []         #Y values
 firstderiv = []     #Definition of derivative 
 secondderiv = []    #Definition of derivative reapplied 
 h = 0.000001     
-res = 40
+res = 100
 # Generate lists of points, derivatives, and second derivatives.
 for l in range(res*IntvlS,res*IntvlE):          
     indices.append(float(l)/res)        #taking integers and turning them into floats                     
@@ -38,7 +38,7 @@ print (firstderiv)
 #find extrema
 extremax = []
 for idx,val in enumerate(firstderiv):
-    if val < 0.1 and val > -0.1:
+    if val < (1/res) and val > (-1/res):
         extremax.append(indices[idx])
         
 print (extremax)
