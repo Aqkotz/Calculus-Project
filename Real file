@@ -7,7 +7,7 @@ points = []         #Y values
 firstderiv = []     #Definition of derivative 
 secondderiv = []    #Definition of derivative reapplied 
 h = 0.000001     
-res = 50
+res = 500
 # Generate lists of points, derivatives, and second derivatives.
 for l in range(res*IntvlS,res*IntvlE):          
     indices.append(float(l)/res)        #taking integers and turning them into floats                     
@@ -21,7 +21,8 @@ for i in indices:                               #calculates the first derivative
     FunPets = FunCat-FunDog
     FunTimes = FunPets/h
     firstderiv.append(FunTimes)                 #adds 1st derivative values to empty list
-#for k in indices:                               #Calculates the second derivative
+"""
+for k in indices:                               #Calculates the second derivative
     x = k+h
     FunIguana = eval(Function)
     x = k
@@ -31,36 +32,30 @@ for i in indices:                               #calculates the first derivative
     FunDonkey = FunIguana + FunMonkey + FunSnail
     FunAndrew = FunDonkey/(h**2)
     secondderiv.append(FunAndrew)
-
+"""
 #find criticals
-def near(val,targ):
-    if (val-targ) <= (1.5/res) and (val-targ) >= (-1.5/res):
+def near(val,target):
+    if (val-target) <= (1/res) and (val-target) >= (-1/res):
         return True
     else:
         return False
 criticals = []
 maxes = []
 mins = []
-pofs = []
+pois = []
 
 for i,num in enumerate(points):
     if near(firstderiv[i],0):
         if num > points[i-1] and num > points[i+1]:
+            maxes.append(indices[i])
+        elif num < points[i-1] and num < points[i+1]:
+            mins.append(indices[i])
+            
 
-"""
-for idx,num in enumerate(firstderiv):
-    if near(num,0):
-        criticals.append(idx)
+for i,num in enumerate():
 
-for g in criticals:
-    if near(secondderiv[g],0):
-        pofs.append(indices[g])
-    elif secondderiv[g] > 0:
-        mins.append(indices[g])
-    elif secondderiv[g] < 0:
-        maxes.append(indices[g])
 
+print("")
 print("maxes: "+str(maxes))
 print("mins: "+str(mins))
-print("pofs: "+str(pofs))
-"""
+print("POIs: "+str(pois))
