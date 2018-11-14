@@ -61,6 +61,33 @@ for i,num in enumerate(secondderiv):
             pois.append(indices[i])
             
 
+bothlists = mins
+incstarts = []
+incends = []
+decstarts = []
+decends = []
+for num in maxes:
+    bothlists.append(num)
+for i,num in enumerate(bothlists):
+    
+    
+"""
+for i,num in enumerate(firstderiv):
+    if num > 0:
+        if lastsign < 0:
+            decends.append(indices[i-1])
+            incstarts.append(indices[i])
+    if num < 0:
+        if lastsign > 0:
+            incends.append(indices[i-1])
+            decstarts.append(indices[i])
+"""
+print("Increasing: ")
+for i,b in enumerate(incstarts):
+    print ("("+b+","+incends[i])
+print("Decreasing: ")
+for i,b in enumerate(decstarts):
+    print ("("+b+","+decends[i])
 
 print("")
 print("maxes: "+str(maxes))
