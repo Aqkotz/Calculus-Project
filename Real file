@@ -9,7 +9,7 @@ points = []         #Y values
 firstderiv = []     #Definition of derivative 
 secondderiv = []    #Definition of derivative reapplied 
 h = 0.000001     
-res = 100
+res = 50
 # Generate lists of points, derivatives, and second derivatives.
 for l in range(res*IntvlS,res*IntvlE):          
     indices.append(float(l)/res)        #taking integers and turning them into floats                     
@@ -59,6 +59,7 @@ for i,num in enumerate(secondderiv):
             pois.append(indices[i])
         elif secondderiv[i-1] > 0 and secondderiv[i+1] < 0:
             pois.append(indices[i])
+            
 
 
 print("")
