@@ -21,7 +21,7 @@ for i in indices:                               #calculates the first derivative
     FunPets = FunCat-FunDog
     FunTimes = FunPets/h
     firstderiv.append(FunTimes)                 #adds 1st derivative values to empty list
-for k in indices:                               #Calculates the second derivative
+#for k in indices:                               #Calculates the second derivative
     x = k+h
     FunIguana = eval(Function)
     x = k
@@ -45,7 +45,7 @@ pofs = []
 
 for i,num in enumerate(points):
     if near(firstderiv[i],0):
-        if num > points[i-1] and num > 
+        if num > points[i-1] and num > points[i+1]:
 
 """
 for idx,num in enumerate(firstderiv):
