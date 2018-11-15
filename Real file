@@ -60,7 +60,7 @@ for i,num in enumerate(secondderiv):
         elif secondderiv[i-1] > 0 and secondderiv[i+1] < 0:
             pois.append(indices[i])
             
-
+print(mins)
 bothlists = mins
 incstarts = []
 incends = []
@@ -68,26 +68,29 @@ decstarts = []
 decends = []
 for num in maxes:
     bothlists.append(num)
+bothlists.sort()
+print(mins)
 for i,num in enumerate(bothlists):
+    if num in maxes:
+        incends.append(num)
+        if i != 0:
+            decstarts.append(num-(1/res))
+        else:
+            decstarts.append(IntvlS)
+    elif num in mins:
+        decends.append(num)
+        if i != 0:
+            incstarts.append(num-(1/res))
+        else:
+            incstarts.append(IntvlS)
     
-    
-"""
-for i,num in enumerate(firstderiv):
-    if num > 0:
-        if lastsign < 0:
-            decends.append(indices[i-1])
-            incstarts.append(indices[i])
-    if num < 0:
-        if lastsign > 0:
-            incends.append(indices[i-1])
-            decstarts.append(indices[i])
-"""
+
 print("Increasing: ")
 for i,b in enumerate(incstarts):
-    print ("("+b+","+incends[i])
+    print ("("+str(b)+","+str(incends[i])+")")
 print("Decreasing: ")
 for i,b in enumerate(decstarts):
-    print ("("+b+","+decends[i])
+    print ("("+str(b)+","+str(decends[i])+")")
 
 print("")
 print("maxes: "+str(maxes))
