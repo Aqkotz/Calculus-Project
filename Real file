@@ -105,7 +105,7 @@ elif len(mins) > 0:
         incstarts.append(extrema[len(extrema)-1])
         incends.append(IntvlE)
 
-if len(maxes) = 0 and len(mins) = 0:
+if len(maxes) == 0 and len(mins) == 0:
     if points[0] > points[len(points)-1]:
         decstarts.append(IntvlS)
         decends.append(IntvlE)
