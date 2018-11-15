@@ -8,8 +8,10 @@ indices = []        #x values - quoth andy koth
 points = []         #Y values 
 firstderiv = []     #Definition of derivative 
 secondderiv = []    #Definition of derivative reapplied 
-h = 0.000001     
-res = 50
+h = 0.000001        #value of h, used for finding derivatives
+res = 50            #resolution; influences accuracy of results but also affects performance.
+
+
 # Generate lists of points, derivatives, and second derivatives.
 for l in range(res*IntvlS,res*IntvlE):          
     indices.append(float(l)/res)        #taking integers and turning them into floats                     
@@ -41,18 +43,17 @@ def near(val,target):
     else:
         return False
 
+
+#Find maxima, minima, and points of inflection
 maxes = []
 mins = []
 pois = []
-
 for i,num in enumerate(points):
     if near(firstderiv[i],0):
         if num > points[i-1] and num > points[i+1]:
             maxes.append(indices[i])
         elif num < points[i-1] and num < points[i+1]:
             mins.append(indices[i])
-            
-
 for i,num in enumerate(secondderiv):
     if near(num,0):
         if secondderiv[i-1] < 0 and secondderiv[i+1] > 0:
@@ -61,6 +62,8 @@ for i,num in enumerate(secondderiv):
             pois.append(indices[i])
             
 
+
+#Find 
 bothlists = []
 incstarts = []
 incends = []
@@ -71,7 +74,6 @@ for num in maxes:
 for num in mins:
     bothlists.append(num)
 bothlists.sort()
-print(bothlists)
 for i,num in enumerate(bothlists):
     if num in maxes:
         incends.append(num)
@@ -85,17 +87,20 @@ for i,num in enumerate(bothlists):
             decstarts.append(bothlists[i-1])
         else:
             decstarts.append(IntvlS)
-if bothlists[len(bothlists)-1] > 0:
+if bothlists[len(bothlists)-1] in maxes:
+    decstarts.append(bothlists[len(bothlists)-1])
+    decends.append(IntvlE)
+elif bothlists[len(bothlists)-1] in mins:
+    incstarts.append(bothlists[len(bothlists)-1])
+    incends.append(IntvlE)
     
-    
-
+print("")
 print("Increasing: ")
 for i,b in enumerate(incstarts):
     print ("("+str(b)+","+str(incends[i])+")")
 print("Decreasing: ")
 for i,b in enumerate(decstarts):
     print ("("+str(b)+","+str(decends[i])+")")
-
 print("")
 print("maxes: "+str(maxes))
 print("mins: "+str(mins))
