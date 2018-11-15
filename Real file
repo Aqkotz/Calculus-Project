@@ -57,13 +57,14 @@ for i,num in enumerate(points):                                 #Find maxima and
             mins.append(indices[i])
 for i,num in enumerate(secondderiv):                            #Find points of inflection, add x values to list
     if near(num,0):
-        print(indices[i])
-        if secondderiv[i-1] < 0 and num > 0:
+        if secondderiv[i-1] <= 0 and num > 0:
             pois.append(indices[i])
             poitypes.append(1)
-        elif secondderiv[i-1] > 0 and num < 0:
+        elif secondderiv[i-1] >= 0 and num < 0:
             pois.append(indices[i])
             poitypes.append(-1)
+        print (secondderiv[i-1])
+        print (num)
 
 
 #Find increasing and decreasing intervals; the starts are held in separate lists from the ends of the intervals
