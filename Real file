@@ -82,13 +82,13 @@ extrema.sort()
 
 #Put together the interval lists
 for i,num in enumerate(extrema):
-    if num in maxima:
+    if num in maxes:
         incends.append(num)
         if i != 0:
             incstarts.append(extrema[i-1])
         else:
             incstarts.append(IntvlS)            #If this is the first extreme, the interval should start at the beginning of the interval
-    elif num in minima:
+    elif num in mins:
         decends.append(num)
         if i != 0:
             decstarts.append(extrema[i-1])
