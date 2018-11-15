@@ -38,7 +38,7 @@ for i in indices:
 
 #Near function determines whether or not a value is near a target
 def near(val,target):
-    if (val-target) <= (1/res) and (val-target) >= (-1/res):
+    if (val-target) <= (4/res) and (val-target) >= (-4/res):
         return True
     else:
         return False
@@ -48,6 +48,7 @@ def near(val,target):
 maxes = []
 mins = []
 pois = []
+poitypes = []
 for i,num in enumerate(points):                                 #Find maxima and minima, add x values to lists
     if near(firstderiv[i],0):
         if num > points[i-1] and num > points[i+1]:
@@ -58,8 +59,10 @@ for i,num in enumerate(secondderiv):                            #Find points of 
     if near(num,0):
         if secondderiv[i-1] < 0 and num > 0:
             pois.append(indices[i])
+            poitypes.append(1)
         elif secondderiv[i-1] > 0 and num < 0:
             pois.append(indices[i])
+            poitypes.append(-1)
 
 
 #Find increasing and decreasing intervals; the starts are held in separate lists from the ends of the intervals
@@ -76,15 +79,16 @@ for num in mins:
     extrema.append(num)
 extrema.sort()
 
+
 #Put together the interval lists
 for i,num in enumerate(extrema):
-    if num in maxes:
+    if num in maxima:
         incends.append(num)
         if i != 0:
             incstarts.append(extrema[i-1])
         else:
             incstarts.append(IntvlS)            #If this is the first extreme, the interval should start at the beginning of the interval
-    elif num in mins:
+    elif num in minima:
         decends.append(num)
         if i != 0:
             decstarts.append(extrema[i-1])
@@ -92,14 +96,22 @@ for i,num in enumerate(extrema):
             decstarts.append(IntvlS)            #If this is the first extreme, the interval should start at the beginning of the interval
 
 #The final interval is not handled by the above code, so this adds it in separately
-if extrema[len(extrema)-1] in maxes:
-    decstarts.append(extrema[len(extrema)-1])
-    decends.append(IntvlE)
-elif extrema[len(extrema)-1] in mins:
-    incstarts.append(extrema[len(extrema)-1])
-    incends.append(IntvlE)
+if len(maxes) > 0:
+    if extrema[len(extrema)-1] in maxes:
+        decstarts.append(extrema[len(extrema)-1])
+        decends.append(IntvlE)
+elif len(mins) > 0:
+    if extrema[len(extrema)-1] in mins:
+        incstarts.append(extrema[len(extrema)-1])
+        incends.append(IntvlE)
 
-
+if len(maxes) = 0 and len(mins) = 0:
+    if points[0] > points[len(points)-1]:
+        decstarts.append(IntvlS)
+        decends.append(IntvlE)
+    else:
+        incstarts.append(IntvlS)
+        incends.append(IntvlE)
 
 #Find concave up and concave down intervals; the starts are held in separate lists from the ends of the intervals
 upstarts = []
@@ -109,7 +121,26 @@ downends = []
 
 #Put together the interval lists
 for i,num in enumerate(pois):
-    if 
+    if poitypes[i] < 0:
+        upends.append(num)
+        if i != 0:
+            upstarts.append(pois[i-1])
+        else:
+            upstarts.append(IntvlS)
+    elif poitypes[i] > 0:
+        downends.append(num)
+        if i != 0:
+            downstarts.append(pois[i-1])
+        else:
+            downstarts.append(IntvlS)
+
+if len(poitypes) > 0:
+    if poitypes[len(poitypes)-1] > 0:
+        upstarts.append(pois[len(poitypes)-1])
+        upends.append(IntvlE)
+    elif poitypes[len(poitypes)-1] < 0:
+        downstarts.append(pois[len(poitypes)-1])
+        downends.append(IntvlE)
 
 
 #Print all results   
@@ -120,6 +151,13 @@ for i,b in enumerate(incstarts):
 print("Decreasing: ")
 for i,b in enumerate(decstarts):
     print ("("+str(b)+","+str(decends[i])+")")
+print("")
+print("Concave up: ")
+for i,b in enumerate(upstarts):
+    print ("("+str(b)+","+str(upends[i])+")")
+print("Concave down: ")
+for i,b in enumerate(downstarts):
+    print ("("+str(b)+","+str(downends[i])+")")
 print("")
 print("maxes: "+str(maxes))
 print("mins: "+str(mins))
