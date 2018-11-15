@@ -14,9 +14,9 @@ res = 50            #resolution; influences accuracy of results but also affects
 
 # Generate lists of points, derivatives, and second derivatives.
 for l in range(res*IntvlS,res*IntvlE):          
-    indices.append(float(l)/res)        #taking integers and turning them into floats                     
+    indices.append(float(l)/res)        #taking integers and turning them into floats                        #List of x values
 for x in indices:    #for exponents use x**
-    points.append(eval(Function))               #adds y values to the empty list of points
+    points.append(eval(Function))               #adds y values to the empty list of points                        #List of y values
 for i in indices:                               #calculates the first derivative
     x = i
     FunCat = eval(Function)
@@ -24,7 +24,7 @@ for i in indices:                               #calculates the first derivative
     FunDog = eval(Function)
     FunPets = FunCat-FunDog
     FunTimes = FunPets/h
-    firstderiv.append(FunTimes)                 #adds 1st derivative values to empty list
+    firstderiv.append(FunTimes)                 #adds 1st derivative values to empty list                        #list of first derivatives
 for k in indices:                               #Calculates the second derivative
     x = k+h
     FunIguana = eval(Function)
@@ -34,9 +34,9 @@ for k in indices:                               #Calculates the second derivativ
     FunSnail = eval(Function)
     FunDonkey = FunIguana + FunMonkey + FunSnail
     FunAndrew = FunDonkey/(h**2)
-    secondderiv.append(FunAndrew)
+    secondderiv.append(FunAndrew)                        #list of second derivatives
 
-#find criticals
+#Near function determines whether or not a value is near a target
 def near(val,target):
     if (val-target) <= (1/res) and (val-target) >= (-1/res):
         return True
@@ -48,13 +48,13 @@ def near(val,target):
 maxes = []
 mins = []
 pois = []
-for i,num in enumerate(points):
+for i,num in enumerate(points):                                 #Find maxima and minima, add x values to lists
     if near(firstderiv[i],0):
         if num > points[i-1] and num > points[i+1]:
             maxes.append(indices[i])
         elif num < points[i-1] and num < points[i+1]:
             mins.append(indices[i])
-for i,num in enumerate(secondderiv):
+for i,num in enumerate(secondderiv):                            #Find points of inflection, add x values to list
     if near(num,0):
         if secondderiv[i-1] < 0 and secondderiv[i+1] > 0:
             pois.append(indices[i])
@@ -63,37 +63,46 @@ for i,num in enumerate(secondderiv):
             
 
 
-#Find 
-bothlists = []
+#Find increasing and decreasing intervals; the starts are held in separate lists from the ends of the intervals
+extrema = [] 
 incstarts = []
 incends = []
 decstarts = []
 decends = []
+
+#Add maxes and mins to the list of extrema
 for num in maxes:
-    bothlists.append(num)
+    extrema.append(num)
 for num in mins:
-    bothlists.append(num)
-bothlists.sort()
-for i,num in enumerate(bothlists):
+    extrema.append(num)
+extrema.sort()
+
+#
+for i,num in enumerate(extrema):
     if num in maxes:
         incends.append(num)
         if i != 0:
-            incstarts.append(bothlists[i-1])
+            incstarts.append(extrema[i-1])
         else:
-            incstarts.append(IntvlS)
+            incstarts.append(IntvlS)            #If this is the first extreme, the interval should start at the beginning of the interval
     elif num in mins:
         decends.append(num)
         if i != 0:
-            decstarts.append(bothlists[i-1])
+            decstarts.append(extrema[i-1])
         else:
-            decstarts.append(IntvlS)
-if bothlists[len(bothlists)-1] in maxes:
-    decstarts.append(bothlists[len(bothlists)-1])
+            decstarts.append(IntvlS)            #If this is the first extreme, the interval should start at the beginning of the interval
+
+#The final interval is not handled by the above code, so this adds it in separately
+if extrema[len(extrema)-1] in maxes:
+    decstarts.append(extrema[len(extrema)-1])
     decends.append(IntvlE)
-elif bothlists[len(bothlists)-1] in mins:
-    incstarts.append(bothlists[len(bothlists)-1])
+elif extrema[len(extrema)-1] in mins:
+    incstarts.append(extrema[len(extrema)-1])
     incends.append(IntvlE)
-    
+
+
+
+#Print all results   
 print("")
 print("Increasing: ")
 for i,b in enumerate(incstarts):
