@@ -17,15 +17,7 @@ for l in range(res*IntvlS,res*IntvlE):
     indices.append(float(l)/res)        #taking integers and turning them into floats                        #List of x values
 for x in indices:    #for exponents use x**
     points.append(eval(Function))               #adds y values to the empty list of points                        #List of y values
-for i in indices:                               #calculates the first derivative
-    x = i
-    FunCat = eval(Function)
-    x = i + h
-    FunDog = eval(Function)
-    FunPets = FunCat-FunDog
-    FunTimes = FunPets/h
-    firstderiv.append(FunTimes)                 #adds 1st derivative values to empty list                        #list of first derivatives
-for k in indices:                               #Calculates the second derivative
+for k in indices:                           #Calculates the second derivative
     x = k+h
     FunIguana = eval(Function)
     x = k
@@ -35,6 +27,14 @@ for k in indices:                               #Calculates the second derivativ
     FunDonkey = FunIguana + FunMonkey + FunSnail
     FunAndrew = FunDonkey/(h**2)
     secondderiv.append(FunAndrew)                        #list of second derivatives
+def firstderiv(i):
+    x = i
+    FunCat = eval(Function)
+    x = i + h
+    FunDog = eval(Function)
+    FunPets = FunCat-FunDog
+    FunTimes = FunPets/h
+    return FunTimes
 
 #Near function determines whether or not a value is near a target
 def near(val,target):
@@ -49,7 +49,7 @@ maxes = []
 mins = []
 pois = []
 for i,num in enumerate(points):                                 #Find maxima and minima, add x values to lists
-    if near(firstderiv[i],0):
+    if near(firstderiv(i),0):
         if num > points[i-1] and num > points[i+1]:
             maxes.append(indices[i])
         elif num < points[i-1] and num < points[i+1]:
@@ -57,8 +57,10 @@ for i,num in enumerate(points):                                 #Find maxima and
 for i,num in enumerate(secondderiv):                            #Find points of inflection, add x values to list
     if near(num,0):
         if secondderiv[i-1] < 0 and secondderiv[i+1] > 0:
+            print (str(secondderiv[i-1])+" and "+str(secondderiv[i+1]))
             pois.append(indices[i])
         elif secondderiv[i-1] > 0 and secondderiv[i+1] < 0:
+            print (str(secondderiv[i-1])+" and "+str(secondderiv[i+1]))
             pois.append(indices[i])
             
 
@@ -77,7 +79,7 @@ for num in mins:
     extrema.append(num)
 extrema.sort()
 
-#
+#Put together the interval lists
 for i,num in enumerate(extrema):
     if num in maxes:
         incends.append(num)
