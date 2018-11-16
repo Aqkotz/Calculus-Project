@@ -13,7 +13,7 @@ res = 50            #resolution; influences accuracy of results but also affects
 
 
 # Generate lists of points, derivatives, and second derivatives.
-for l in range(res*IntvlS,res*IntvlE):          
+for l in range(res*IntvlS,(res*IntvlE)+1):          
     indices.append(float(l)/res)        #taking integers and turning them into floats                        #List of x values
 for x in indices:    #for exponents use x**
     points.append(eval(Function))               #adds y values to the empty list of points                        #List of y values
@@ -120,28 +120,55 @@ downstarts = []
 downends = []
 
 #Put together the interval lists
-for i,num in enumerate(pois):
-    if poitypes[i] < 0:
-        upends.append(num)
-        if i != 0:
-            upstarts.append(pois[i-1])
-        else:
-            upstarts.append(IntvlS)
-    elif poitypes[i] > 0:
-        downends.append(num)
-        if i != 0:
-            downstarts.append(pois[i-1])
-        else:
-            downstarts.append(IntvlS)
-
 if len(poitypes) > 0:
+    for i,num in enumerate(pois):
+        if poitypes[i] < 0:
+            upends.append(num)
+            if i != 0:
+                upstarts.append(pois[i-1])
+            else:
+                upstarts.append(IntvlS)
+        elif poitypes[i] > 0:
+            downends.append(num)
+            if i != 0:
+                downstarts.append(pois[i-1])
+            else:
+                downstarts.append(IntvlS)
     if poitypes[len(poitypes)-1] > 0:
         upstarts.append(pois[len(poitypes)-1])
         upends.append(IntvlE)
     elif poitypes[len(poitypes)-1] < 0:
         downstarts.append(pois[len(poitypes)-1])
         downends.append(IntvlE)
+        
+elif len(pois) == 0:
+    if len(maxes) == 1:
+        downstarts.append(IntvlS)
+        downends.append(IntvlE)
+    elif len(mins) == 1:
+        upstarts.append(IntvlS)
+        upends.append(IntvlE)
+    else:
+        print ("i dunno what to do")
 
+
+#Find absolute extrema:
+maxima = []
+minima = []
+for i in maxes:
+    maxima.append(points[indices.index(i)])
+for i in mins:
+    minima.append(points[indices.index(i)])
+absmin = min(minima)
+absmax = max(maxima)
+if points[0] > absmax:
+    absmax = points[0]
+if points[-1] > absmax:
+    absmax = points[-1]
+if points[0] < absmin:
+    absmin = points[0]
+if points[-1] < absmin:
+    absmin = points[-1]
 
 #Print all results   
 print("")
@@ -159,6 +186,8 @@ print("Concave down: ")
 for i,b in enumerate(downstarts):
     print ("["+str(b)+","+str(downends[i])+"]")
 print("")
-print("maxes: "+str(maxes))
-print("mins: "+str(mins))
+print("local maxes: "+str(maxes))
+print("local mins: "+str(mins))
 print("POIs: "+str(pois))
+print("Absolute maximum: "+str(absmax))
+print("Absoulte minimum: "+str(absmin))
