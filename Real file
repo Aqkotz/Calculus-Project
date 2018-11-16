@@ -151,11 +151,17 @@ elif len(pois) == 0:                    #If there are no POIs, try to find the c
     elif len(mins) == 1:
         upstarts.append(IntvlS)
         upends.append(IntvlE)
-    else:
-        print ("i dunno what to do")
-
-elif len(maxes) == 0 and len(mins) == 0: #If there are no maxes or mins, try to find concavity based on Mean Value Theorem
-    
+    else:                                         #If there are no maxes or mins, try to find concavity based on Mean Value Theorem
+        secantslope = (points[-1]-points[0])/(IntvlE-IntvlS)
+        midpointx = indices[len(indices)/2]
+        secantpointy = secantslope*(midpointx-indices[0])+points[0]
+        midpointy = points[len(points)/2]
+        if midpointy > secantpointy:
+            downstarts.append(indices[0])
+            downends.append(indices[-1])
+        elif midpointy < secantpointy:
+            upstarts.append(indices[0])
+            upends.append(indices[-1])
 
 
 #Print all results   
