@@ -144,7 +144,7 @@ if len(poitypes) > 0:
         downstarts.append(pois[len(poitypes)-1])
         downends.append(IntvlE)
         
-elif len(pois) == 0:                    #If there are no POIs, try to determine the concavity based on maxes and mins
+elif len(pois) == 0:                    #If there are no POIs, try to find the concavity based on maxes and mins
     if len(maxes) == 1:
         downstarts.append(IntvlS)
         downends.append(IntvlE)
@@ -153,6 +153,9 @@ elif len(pois) == 0:                    #If there are no POIs, try to determine 
         upends.append(IntvlE)
     else:
         print ("i dunno what to do")
+
+elif len(maxes) == 0 and len(mins) == 0: #If there are no maxes or mins, try to find concavity based on Mean Value Theorem
+    
 
 
 #Print all results   
