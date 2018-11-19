@@ -9,14 +9,14 @@ points = []         #Y values
 firstderiv = []     #Definition of derivative 
 secondderiv = []    #Definition of derivative reapplied 
 h = 0.000001        #value of h, used for finding derivatives
-res = 100           #resolution; influences accuracy of results but also affects performance.
+res = 30           #resolution; influences accuracy of results but also affects performance.
 
 
 # Generate lists of points, derivatives, and second derivatives.
 for l in range(res*IntvlS,(res*IntvlE)+1):          
-    indices.append(float(l)/res)        #taking integers and turning them into floats                        #List of x values
-for x in indices:    #for exponents use x**
-    points.append(eval(Function))               #adds y values to the empty list of points                        #List of y values
+    indices.append(float(l)/res)            #taking integers and turning them into floats                        #List of x values
+for x in indices:
+    points.append(eval(Function))           #adds y values to the empty list of points                        #List of y values
 for k in indices:                           #Calculates the second derivative
     x = k+h
     FunIguana = eval(Function)
