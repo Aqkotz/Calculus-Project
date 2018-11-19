@@ -144,7 +144,7 @@ if len(poitypes) > 0:
         downstarts.append(pois[len(poitypes)-1])
         downends.append(IntvlE)
 
-else:                                         #If there are no maxes or mins, try to find concavity based on Mean Value Theorem
+else:                                         #If there are no POIs, try to find concavity based on secant lines
     secantslope = (points[-1]-points[0])/(IntvlE-IntvlS)
     midpointx = indices[len(indices)/2]
     secantpointy = secantslope*(midpointx-indices[0])+points[0]
